@@ -1,0 +1,75 @@
+#############USER DEFINED####################
+# eval "$(starship init bash)"
+eval "$(zoxide init bash)"
+
+# Alias PC
+alias v='nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
+alias r='ranger'
+alias aptup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y'
+alias cat='bat --style=plain'
+alias brc='nvim ~/.bashrc'
+alias cbrc='bat --style=plain ~/.bashrc'
+alias sbrc='source ~/.bashrc'
+alias cls='clear'
+alias cd='z'
+alias ls='eza --color=always --git --icons=always --sort=created --reverse --group-directories-first --across'
+alias ll='eza --color=always --git --icons=always --long --tree --level=2 --sort=created --reverse --group-directories-first --across'
+
+# ALias Python, Rust, Go
+alias p='python3'
+
+source "$HOME/.cargo/env"
+alias cr='cargo run --release'
+alias cb='cargo build --release'
+alias cc='cargo clean'
+
+export PATH=$PATH:/usr/local/go/bin
+alias g='go run .'
+alias gg='go mody tidy'
+alias gb='go build'
+
+# Alias ROS
+export ROS_DISTRO_BASH=humble
+source /opt/ros/$ROS_DISTRO_BASH/setup.bash
+source $HOME/ros2_ws/install/setup.bash
+# source $HOME/rmf_ws/install/setup.bash
+
+# Alias Turtlebot4
+source /etc/turtlebot4/setup.bash
+# export ROS_DOMAIN_ID=0
+# export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export ISAAC_ROS_WS=${HOME}/workspaces/isaac_ros-dev/
+
+# Alias K8S
+
+# Alias Others
+
+# Omniverse python path
+alias opy="/home/user/.local/share/ov/pkg/isaac-sim-4.1.0/python.sh"
+
+
+# Function: mkdir && cd
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Function: xclip
+clip () {
+    xclip -selection clipboard "$1"
+}
+export ISAAC_ROS_WS=/home/user/workspaces/isaac_ros-dev/
+
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=/home/user/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+export PATH="$PATH:/home/user/.modular/bin"
+
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Openai api
+export OPENAI_API_KEY=""
+
