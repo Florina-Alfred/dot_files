@@ -3,32 +3,32 @@
 eval "$(zoxide init bash)"
 
 # Alias PC
-alias v='nvim'
-export EDITOR='nvim'
-export VISUAL='nvim'
-alias r='ranger'
-alias aptup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y'
-alias cat='bat --style=plain'
-alias brc='nvim ~/.bashrc'
-alias cbrc='bat --style=plain ~/.bashrc'
-alias sbrc='source ~/.bashrc'
-alias cls='clear'
-alias cd='z'
-alias ls='eza --color=always --git --icons=always --sort=created --reverse --group-directories-first --across'
-alias ll='eza --color=always --git --icons=always --long --tree --level=2 --sort=created --reverse --group-directories-first --across'
+alias v="nvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+alias r="ranger"
+alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y"
+alias cat="bat --style=plain"
+alias brc="nvim ~/.bashrc"
+alias cbrc="bat --style=plain ~/.bashrc"
+alias sbrc="source ~/.bashrc"
+alias cls="clear"
+alias cd="z"
+alias ls="eza --color=always --git --icons=always --sort=created --reverse --group-directories-first --across"
+alias ll="eza --color=always --git --icons=always --long --tree --level=2 --sort=created --reverse --group-directories-first --across"
 
 # ALias Python, Rust, Go
-alias p='python3'
+alias p="python3"
 
 source "$HOME/.cargo/env"
-alias cr='cargo run --release'
-alias cb='cargo build --release'
-alias cc='cargo clean'
+alias cr="cargo run --release"
+alias cb="cargo build --release"
+alias cc="cargo clean"
 
 export PATH=$PATH:/usr/local/go/bin
-alias g='go run .'
-alias gg='go mody tidy'
-alias gb='go build'
+alias g="go run ."
+alias gg="go mody tidy"
+alias gb="go build"
 
 # Alias ROS
 export ROS_DISTRO_BASH=humble
