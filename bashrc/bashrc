@@ -1,54 +1,62 @@
 #############USER DEFINED####################
 # eval "$(starship init bash)"
-eval "$(zoxide init bash)"
 
 # Alias PC
 alias v="nvim"
 export EDITOR="nvim"
 export VISUAL="nvim"
 alias r="ranger"
-alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y"
+# cargo install cargo-update
+alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y && brew update && brew upgrade && cargo install-update -a -g"
 alias cat="bat --style=plain"
 alias brc="nvim ~/.bashrc"
 alias cbrc="bat --style=plain ~/.bashrc"
 alias sbrc="source ~/.bashrc"
 alias cls="clear"
 alias cd="z"
-alias ls="eza --color=always --git --icons=always --sort=created --reverse --group-directories-first --across"
-alias ll="eza --color=always --git --icons=always --long --tree --level=2 --sort=created --reverse --group-directories-first --across"
-# alias oil="~/.local/bin/oil-ssh.sh"
+alias ..="cd ../"
+# alias lla="ls -la"
+alias ls="eza --color=always --git --icons=always --sort=created --reverse --group-directories-first --across" 
+alias ll="eza --all --color=always --git --icons=always --long --tree --level=2 --sort=created --reverse --group-directories-first --across" 
+alias oil='~/.local/bin/oil-ssh.sh'
+alias ld="lazydocker"
+alias lg="lazygit"
 
-# ALias Python, Rust, Go
+# ALias Python, Rust, Go, Mojo
 alias p="python3"
 
 source "$HOME/.cargo/env"
 alias cr="cargo run --release"
 alias cb="cargo build --release"
 alias cc="cargo clean"
+eval "$(zoxide init bash)"
 
 export PATH=$PATH:/usr/local/go/bin
 alias g="go run ."
 alias gg="go mody tidy"
 alias gb="go build"
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Alias ROS
-export ROS_DISTRO_BASH=humble
-source /opt/ros/$ROS_DISTRO_BASH/setup.bash
-source $HOME/ros2_ws/install/setup.bash
+# export ROS_DISTRO_BASH=humble
+# source /opt/ros/$ROS_DISTRO_BASH/setup.bash
+# source $HOME/ros2_ws/install/setup.bash
 # source $HOME/rmf_ws/install/setup.bash
 
 # Alias Turtlebot4
-source /etc/turtlebot4/setup.bash
+# source /etc/turtlebot4/setup.bash
 # export ROS_DOMAIN_ID=0
 # export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-export ISAAC_ROS_WS=${HOME}/workspaces/isaac_ros-dev/
+# export ISAAC_ROS_WS=${HOME}/workspaces/isaac_ros-dev/
 
 # Alias K8S
 
 # Alias Others
+alias tf="tofu"
+source "/home/user/creds/aws_key.sh"
 
 # Omniverse python path
-alias opy="/home/user/.local/share/ov/pkg/isaac-sim-4.1.0/python.sh"
+# alias opy="/home/user/.local/share/ov/pkg/isaac-sim-4.1.0/python.sh"
 
 
 # Function: mkdir && cd
@@ -60,17 +68,60 @@ mkcd() {
 clip () {
     xclip -selection clipboard "$1"
 }
-export ISAAC_ROS_WS=/home/user/workspaces/isaac_ros-dev/
 
+# Function: yt-dlp to get transcript
+yt() {
+    if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
+        echo "Usage: yt [-t | --timestamps] youtube-link"
+        echo "Use the '-t' flag to get the transcript with timestamps."
+        return 1
+    fi
+
+    transcript_flag="--transcript"
+    if [ "$1" = "-t" ] || [ "$1" = "--timestamps" ]; then
+        transcript_flag="--transcript-with-timestamps"
+        shift
+    fi
+    local video_link="$1"
+    fabric -y "$video_link" $transcript_flag
+}
+
+# Function: mojo ease of use
+mojo() {
+    if [ "$1" = "init" ] && [ -n "$2" ]; then
+        pixi init "$2" -c https://conda.modular.com/max-nightly/ -c conda-forge && cd "$2"
+    else
+        command mojo "$@"
+    fi
+}
+
+
+# export ISAAC_ROS_WS=/home/user/workspaces/isaac_ros-dev/
 # virtualenv and virtualenvwrapper
-export WORKON_HOME=/home/user/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=/home/user/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+# source /usr/local/bin/virtualenvwrapper.sh
 export PATH="$PATH:/home/user/.modular/bin"
 
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Openai api
-export OPENAI_API_KEY=""
+# export OPENAI_API_KEY=""
+
+
+# Gitlab-CI-Local
+export GCL_NEEDS=true                   # --needs options
+# export GCL_FILE='.gitlab-ci-local.yml'  # --file=.gitlab-ci-local.yml
+alias gcl='gitlab-ci-local'
+# gitlab-ci-local --completion
+export GCL_TIMESTAMPS=true # or --timestamps: show timestamps in logs
+export GCL_MAX_JOB_NAME_PADDING=30 # or --maxJobNamePadding: limit padding around job name
+# export GCL_QUIET=true # or --quiet: Suppress all job output
+
+
+export SEARXNG_API_URL=http://0.0.0.0:8081
+. "$HOME/.local/bin/env"
+
+#######################SYSTEM#ADDED#####################################
 
